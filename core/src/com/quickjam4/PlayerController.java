@@ -3,6 +3,7 @@ package com.quickjam4;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -12,9 +13,15 @@ public class PlayerController extends VectorizedSprite {
 
 	private float gravityAccel = 0;
 	private float friction = 100;
+	
+	TextureRegion pTD, pTU, pTR;
 
-	public PlayerController(Texture img) {
-		super(img);
+	public PlayerController(TextureRegion playerTextureDown, TextureRegion playerTextureUp,
+			TextureRegion playerTextureRight) {
+		super(playerTextureDown);
+		pTD = playerTextureDown;
+		pTU = playerTextureUp;
+		pTR = playerTextureRight;
 	}
 
 	public void update(float dt) {
@@ -27,6 +34,25 @@ public class PlayerController extends VectorizedSprite {
 			} else {
 				setPosition(getX(), 568 - getHeight());
 				movement.y = 0;
+			}
+		}
+		
+		if (Math.abs(movement.x) > Math.abs(movement.y)) {
+			if (movement.x > 0) {
+				this.setRegion(pTR);
+				this.setSize(pTR.getRegionWidth(), pTR.getRegionHeight());
+			} else {
+				this.setRegion(pTR);
+				this.flip(true, false);
+				this.setSize(pTR.getRegionWidth(), pTR.getRegionHeight());
+			}
+		} else {
+			if (movement.y > 0) {
+				this.setRegion(pTU);
+				this.setSize(pTU.getRegionWidth(), pTU.getRegionHeight());
+			} else {
+				this.setRegion(pTD);
+				this.setSize(pTD.getRegionWidth(), pTD.getRegionHeight());
 			}
 		}
 

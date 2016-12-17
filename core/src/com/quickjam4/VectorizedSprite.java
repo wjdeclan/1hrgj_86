@@ -2,12 +2,17 @@ package com.quickjam4;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class VectorizedSprite extends Sprite {
 	protected Vector2 movement = new Vector2(0, 0);
 
 	public VectorizedSprite(Texture img) {
+		super(img);
+	}
+	
+	public VectorizedSprite(TextureRegion img) {
 		super(img);
 	}
 
